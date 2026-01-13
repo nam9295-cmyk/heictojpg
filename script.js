@@ -8,7 +8,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const downloadLink = document.getElementById('downloadLink');
     const resetBtn = document.getElementById('resetBtn');
     const subtitle = document.getElementById('subtitleText');
-    const title = document.getElementById('titleText'); // Select title to update if needed
+    const title = document.getElementById('titleText');
 
     // Segmented Control Inputs
     const modeImageInput = document.getElementById('mode-image');
@@ -18,15 +18,22 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // --- State & FFmpeg ---
     let currentMode = 'image'; // 'image' or 'video'
-    const { createFFmpeg, fetchFile } = FFmpeg;
+    const { FFmpeg } = FFmpegWASM;
+    const { fetchFile, toBlobURL } = FFmpegUtil;
     let ffmpeg = null;
 
-    // Initialize FFmpeg on load (lazy load can be better but this is fine)
+    // Initialize FFmpeg
     async function initFFmpeg() {
         if (ffmpeg === null) {
-            ffmpeg = createFFmpeg({ log: true });
-            // We load it when needed or in background? 
-            // Better to load when switching to video mode or on first video drop to avoid heavy startup if not needed.
+            ffmpeg = new FFmpeg();
+            // log progress
+            ffmpeg.on('log', ({ message }) => {
+                console.log(message);
+            });
+            ffmpeg.on('progress', ({ progress }) => {
+                const percent = Math.round(progress * 100);
+                loadingText.textContent = `동영상 인코딩 중... (${percent}%)`;
+            });
         }
     }
 
@@ -49,11 +56,6 @@ document.addEventListener('DOMContentLoaded', () => {
             fileInput.accept = ".mov,.MOV";
             title.textContent = "MOV Converter";
             subtitle.innerHTML = "MOV 영상을 MP4로<br>간편하게 변환하세요.";
-
-            // Pre-load FFmpeg if not loaded
-            if (!ffmpeg || !ffmpeg.isLoaded()) {
-                initFFmpeg();
-            }
         }
     }
 
@@ -146,26 +148,27 @@ document.addEventListener('DOMContentLoaded', () => {
         showLoading('동영상 인코딩 준비 중...');
 
         try {
-            if (!ffmpeg) initFFmpeg();
-            if (!ffmpeg.isLoaded()) {
-                await ffmpeg.load();
+            if (!ffmpeg) await initFFmpeg();
+
+            if (!ffmpeg.loaded) {
+                // Explicitly load Single Threaded Core
+                const baseURL = 'https://unpkg.com/@ffmpeg/core@0.12.6/dist/esm';
+                await ffmpeg.load({
+                    coreURL: await toBlobURL(`${baseURL}/ffmpeg-core.js`, 'text/javascript'),
+                    wasmURL: await toBlobURL(`${baseURL}/ffmpeg-core.wasm`, 'application/wasm'),
+                });
             }
 
             const fileName = 'input.mov';
-            ffmpeg.FS('writeFile', fileName, await fetchFile(file));
+            await ffmpeg.writeFile(fileName, await fetchFile(file));
 
             showLoading('동영상 인코딩 중... (0%)');
 
-            ffmpeg.setProgress(({ ratio }) => {
-                const percent = Math.round(ratio * 100);
-                loadingText.textContent = `동영상 인코딩 중... (${percent}%)`;
-            });
-
             // Run conversion
-            await ffmpeg.run('-i', fileName, 'output.mp4');
+            await ffmpeg.exec(['-i', fileName, 'output.mp4']);
 
             // Read the result
-            const data = ffmpeg.FS('readFile', 'output.mp4');
+            const data = await ffmpeg.readFile('output.mp4');
 
             // Create Blob
             const mp4Blob = new Blob([data.buffer], { type: 'video/mp4' });
@@ -173,12 +176,12 @@ document.addEventListener('DOMContentLoaded', () => {
             showResult(mp4Blob, file.name, 'mp4');
 
             // Cleanup
-            ffmpeg.FS('unlink', fileName);
-            ffmpeg.FS('unlink', 'output.mp4');
+            await ffmpeg.deleteFile(fileName);
+            await ffmpeg.deleteFile('output.mp4');
 
         } catch (e) {
             console.error(e);
-            alert('영상 변환 중 오류가 발생했습니다. (브라우저 호환성 문제일 수 있습니다)');
+            alert('영상 변환 중 오류가 발생했습니다: ' + e.message);
             resetUI();
         }
     }
