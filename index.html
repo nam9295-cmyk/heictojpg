@@ -8,6 +8,8 @@
     <meta name="description" content="아이폰 HEIC 사진을 JPG로 무료로 변환하세요. 별도의 프로그램 설치 없이 온라인에서 1초 만에 고화질 이미지 변환이 가능합니다.">
     <!-- heic2any Library -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/heic2any/0.0.3/heic2any.min.js"></script>
+    <!-- Lottie Player -->
+    <script src="https://unpkg.com/@dotlottie/player-component@latest/dist/dotlottie-player.mjs" type="module"></script>
     <link rel="stylesheet" href="style.css">
 </head>
 
@@ -27,8 +29,17 @@
 
     <!-- Main Content (Centered) -->
     <main class="main-content">
+
+        <!-- Story Headline -->
+        <div class="story-headline">
+            <div class="story-badge">Designed by VeryGood Chocolate</div>
+            <h2>매번 포토샵 켜기 귀찮으셨죠?</h2><br>
+            <h1>그래서 디자이너가 직접 만들었습니다.</h1>
+            <p class="story-sub">설치 없이, 로그인 없이. 브라우저에서 가장 빠르고 안전하게 변환하세요.</p>
+        </div>
+
         <div class="card">
-            <h1>HEIC Converter</h1>
+            <h2>HEIC Converter</h2>
             <p class="subtitle">HEIC 이미지를 고화질 JPG로<br>빠르고 안전하게 변환하세요.</p>
 
             <!-- Dropzone -->
@@ -80,6 +91,20 @@
                 <p class="feature-desc">품질 저하 없이<br>선명하게 변환됩니다.</p>
             </div>
         </div>
+
+        <!-- Break Proposal Card (Ad) -->
+        <a href="https://smartstore.naver.com/verygoodchocolate" target="_blank" class="break-card">
+            <div class="break-icon">
+                <dotlottie-player src="https://lottie.host/e2429d75-bfb1-43af-a2cf-d60baa17a1ca/k9Q9iDrxje.lottie"
+                    background="transparent" speed="1" style="width: 100px; height: 100px;" loop
+                    autoplay></dotlottie-player>
+            </div>
+            <div class="break-content">
+                <div class="break-subtitle">당 충전이 필요하신가요?</div>
+                <div class="break-text">디자인 작업엔 달콤한 휴식이 필수죠.<br>대구 베리굿초콜릿에서 직접 만든 수제 초콜릿을 만나보세요.</div>
+                <div class="break-link">구경하러 가기 →</div>
+            </div>
+        </a>
 
         <!-- SEO Info Section -->
         <section id="article-section" class="info-article">

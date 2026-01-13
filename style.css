@@ -461,3 +461,164 @@ p.subtitle {
         font-size: 22px;
     }
 }
+
+
+/* --- Break Proposal Card (Ad) --- */
+.break-card {
+    display: flex;
+    align-items: center;
+    background-color: #FFFFFF;
+    width: 100%;
+    max-width: 480px;
+    padding: 32px;
+    border-radius: 24px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
+    /* Matches other cards */
+    text-decoration: none;
+    margin-bottom: 80px;
+    /* Same spacing as card */
+    transition: all 0.3s cubic-bezier(0.25, 0.1, 0.25, 1);
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
+    border: 1px solid transparent;
+}
+
+.break-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 50px rgba(0, 0, 0, 0.12);
+    /* Subtle background tint shift */
+    background-color: #FDFEFF;
+    border-color: rgba(0, 113, 227, 0.1);
+}
+
+.break-icon {
+    margin-right: 24px;
+    flex-shrink: 0;
+    transition: transform 0.3s ease;
+    display: flex;
+    /* Centering fix */
+    align-items: center;
+    justify-content: center;
+    width: 100px;
+    /* Explicit width to match Lottie */
+    height: 100px;
+}
+
+.break-card:hover .break-icon {
+    transform: scale(1.1) rotate(5deg);
+}
+
+.break-content {
+    text-align: left;
+}
+
+.break-subtitle {
+    font-size: 13px;
+    font-weight: 700;
+    color: #1D1D1F;
+    text-transform: uppercase;
+    letter-spacing: 0.02em;
+    margin-bottom: 6px;
+    opacity: 0.9;
+}
+
+.break-text {
+    font-size: 15px;
+    color: #86868B;
+    line-height: 1.5;
+    margin-bottom: 12px;
+    word-break: keep-all;
+}
+
+.break-link {
+    font-size: 14px;
+    color: #0071E3;
+    font-weight: 600;
+    display: inline-flex;
+    align-items: center;
+    transition: margin-left 0.2s ease;
+}
+
+.break-card:hover .break-link {
+    text-decoration: underline;
+}
+
+/* Mobile Responsiveness for Break Card */
+@media (max-width: 600px) {
+    .break-card {
+        flex-direction: column;
+        text-align: center;
+        padding: 40px 24px;
+    }
+
+    .break-icon {
+        margin-right: 0;
+        margin-bottom: 16px;
+    }
+
+    .break-content {
+        text-align: center;
+    }
+}
+
+/* --- Story Headline Section --- */
+/* --- Story Headline Section --- */
+.story-headline {
+    text-align: center;
+    margin-bottom: 40px;
+    /* Reduced from 60px */
+    margin-top: 20px;
+    /* Reduced from 40px */
+}
+
+.story-badge {
+    display: inline-block;
+    background-color: #E8E8ED;
+    color: #6E6E73;
+    font-size: 12px;
+    font-weight: 600;
+    padding: 6px 12px;
+    border-radius: 20px;
+    margin-bottom: 16px;
+    /* Reduced from 24px */
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.story-headline h2 {
+    font-size: 32px;
+    font-weight: 700;
+    color: #1D1D1F;
+    margin-bottom: 8px;
+    letter-spacing: -0.01em;
+}
+
+.story-headline h1 {
+    font-size: 40px;
+    font-weight: 800;
+    line-height: 1.2;
+    color: #1D1D1F;
+    margin-bottom: 12px;
+    /* Reduced from 16px */
+    letter-spacing: -0.02em;
+}
+
+.story-sub {
+    font-size: 17px;
+    color: #424245;
+    font-weight: 400;
+    line-height: 1.5;
+}
+
+/* Responsive Headline */
+@media (max-width: 600px) {
+    .story-headline h1 {
+        font-size: 32px;
+    }
+
+    .story-sub {
+        font-size: 16px;
+        padding: 0 20px;
+    }
+}
