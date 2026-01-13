@@ -21,30 +21,14 @@ document.addEventListener('DOMContentLoaded', () => {
     const { createFFmpeg, fetchFile } = FFmpeg;
     let ffmpeg = null;
 
-    // Initialize FFmpeg with Blob URL Hack
+    // Initialize FFmpeg with Single Threaded Core Logic
     async function initFFmpeg() {
         if (ffmpeg === null) {
             try {
-                // 1. Define URL for Single Threaded Core (v0.11 compatible)
-                // Use 0.10.0 core for reliable ST support across 0.10/0.11 clients
-                const coreVersion = '0.10.0';
-                const coreURL = `https://unpkg.com/@ffmpeg/core@${coreVersion}/dist/ffmpeg-core.js`;
-
-                // 2. Fetch the script as text
-                const response = await fetch(coreURL);
-                const scriptText = await response.text();
-
-                // 3. Create a Blob from the text
-                // Adjusting the script to look for wasm at absolute path if needed, 
-                // but usually defining mainName/corePath is enough if we don't need to patch the internal path.
-                // For 'Failed to construct Worker', simplified blob is enough.
-                const blob = new Blob([scriptText], { type: 'application/javascript' });
-                const blobURL = URL.createObjectURL(blob);
-
-                // 4. Initialize createFFmpeg with corePath as Blob URL
+                // Initialize createFFmpeg with explicit corePath to Single Threaded Core
                 ffmpeg = createFFmpeg({
                     log: true,
-                    corePath: blobURL,
+                    corePath: 'https://unpkg.com/@ffmpeg/core@0.10.0/dist/ffmpeg-core.js'
                 });
 
                 if (!ffmpeg.isLoaded()) {
@@ -192,7 +176,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         } catch (e) {
             console.error(e);
-            alert('영상 변환 중 오류가 발생했습니다. (브라우저 호환성 또는 보안 정책 문제일 수 있습니다)');
+            alert('영상 변환 중 오류가 발생했습니다. (보안 정책 문제일 수 있습니다. 로컬 서버나 HTTPS 환경을 확인해주세요.)\n' + e.message);
             resetUI();
         }
     }
