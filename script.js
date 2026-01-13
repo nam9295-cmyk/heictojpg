@@ -8,7 +8,34 @@ document.addEventListener('DOMContentLoaded', () => {
     const resetBtn = document.getElementById('resetBtn');
     const subtitle = document.querySelector('.subtitle');
 
+    // --- Elements ---
+    const header = document.querySelector('.site-header'); // Header selection
+
     // --- Event Listeners ---
+
+    // Header Scroll Effect
+    window.addEventListener('scroll', () => {
+        if (window.scrollY > 10) {
+            header.classList.add('scrolled');
+        } else {
+            header.classList.remove('scrolled');
+        }
+    });
+
+    // FAQ Toggle
+    const faqQuestions = document.querySelectorAll('.faq-question');
+    faqQuestions.forEach(question => {
+        question.addEventListener('click', () => {
+            const item = question.parentElement;
+
+            // Optional: Close others when one is opened (Accordion behavior)
+            // document.querySelectorAll('.faq-item').forEach(i => {
+            //     if(i !== item) i.classList.remove('active');
+            // });
+
+            item.classList.toggle('active');
+        });
+    });
 
     // Click to upload
     dropzone.addEventListener('click', () => {

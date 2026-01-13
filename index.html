@@ -4,7 +4,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>HEIC to JPG Converter</title>
+    <title>HEIC to JPG Converter - 무료 온라인 HEIC 변환기</title>
+    <meta name="description" content="아이폰 HEIC 사진을 JPG로 무료로 변환하세요. 별도의 프로그램 설치 없이 온라인에서 1초 만에 고화질 이미지 변환이 가능합니다.">
     <!-- heic2any Library -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/heic2any/0.0.3/heic2any.min.js"></script>
     <link rel="stylesheet" href="style.css">
@@ -12,7 +13,20 @@
 
 <body>
 
-    <div class="main-wrapper">
+    <!-- Sticky Header -->
+    <header class="site-header">
+        <div class="header-container">
+            <div class="logo">HEIC Converter</div>
+            <nav class="nav-links">
+                <a href="about.html">About</a>
+                <a href="#article-section">사용법</a>
+                <a href="#faq-section">FAQ</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Main Content (Centered) -->
+    <main class="main-content">
         <div class="card">
             <h1>HEIC Converter</h1>
             <p class="subtitle">HEIC 이미지를 고화질 JPG로<br>빠르고 안전하게 변환하세요.</p>
@@ -20,7 +34,6 @@
             <!-- Dropzone -->
             <div class="dropzone" id="dropzone">
                 <div class="icon">
-                    <!-- Simple SVG Icon -->
                     <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"
                         stroke-linecap="round" stroke-linejoin="round">
                         <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
@@ -68,32 +81,63 @@
             </div>
         </div>
 
-        <!-- FAQ Section -->
-        <div class="faq-section">
-            <h2 class="faq-heading">자주 묻는 질문 (FAQ)</h2>
+        <!-- SEO Info Section -->
+        <section id="article-section" class="info-article">
+            <h2>HEIC 파일이란?</h2>
+            <p>HEIC(High Efficiency Image Container)는 Apple이 iOS 11부터 도입한 고효율 이미지 포맷입니다. 기존 JPG 대비 용량은 절반 수준이면서도 더 뛰어난
+                화질을 제공합니다. 하지만 윈도우(Windows)나 일부 웹사이트에서는 아직 이 형식을 지원하지 않아, 호환성이 좋은 JPG로 변환해야 하는 경우가 많습니다.</p>
 
-            <div class="faq-item">
-                <h3 class="faq-question">HEIC 파일이 뭔가요?</h3>
-                <p class="faq-answer">Apple 기기에서 사용하는 고효율 이미지 형식입니다. 용량은 작지만 윈도우나 일부 웹사이트에서 열리지 않을 수 있어 변환이 필요합니다.</p>
+            <h2>왜 JPG로 변환해야 하나요?</h2>
+            <p>JPG(JPEG)는 전 세계에서 가장 널리 사용되는 이미지 포맷입니다. 웹사이트 업로드, 문서 첨부, 윈도우 PC에서의 감상 등 모든 환경에서 별도의 뷰어 없이 이미지를 확인할 수
+                있습니다. 아이폰으로 촬영한 소중한 사진을 다른 기기에서 쉽게 공유하고 싶다면 HEIC to JPG 변환이 필수적입니다.</p>
+
+            <p>저희 HEIC Converter는 별도의 프로그램 설치 없이 웹 브라우저만으로 즉시 변환이 가능합니다. 특히 사용자의 사진이 외부 서버로 전송되지 않고 내 컴퓨터(브라우저) 안에서만
+                처리되므로, 개인정보 유출 걱정 없이 안전하게 이용하실 수 있습니다.</p>
+        </section>
+
+    </main>
+
+    <!-- Footer Content (Bottom) -->
+    <footer class="site-footer">
+        <div class="footer-container">
+            <!-- FAQ Section (Updated content) -->
+            <div id="faq-section" class="faq-section">
+                <h2 class="faq-heading">자주 묻는 질문 (FAQ)</h2>
+
+                <div class="faq-item">
+                    <h3 class="faq-question">Q1. 무료인가요?</h3>
+                    <p class="faq-answer">네, 100% 무료이며 변환 횟수에도 제한이 없습니다. 언제 어디서나 자유롭게 이용하세요.</p>
+                </div>
+
+                <div class="faq-item">
+                    <h3 class="faq-question">Q2. 내 사진이 서버에 저장되나요?</h3>
+                    <p class="faq-answer priority-answer">아니요, 절대 저장되지 않습니다. 모든 변환 과정은 서버를 거치지 않고 사용자의 브라우저 내부에서만 처리되므로
+                        외부 유출 걱정이 없습니다.</p>
+                </div>
+
+                <div class="faq-item">
+                    <h3 class="faq-question">Q3. 아이폰 사진만 되나요?</h3>
+                    <p class="faq-answer">아이폰, 아이패드 등 Apple 기기에서 촬영된 모든 HEIC/HEIF 포맷의 이미지를 지원합니다.</p>
+                </div>
+
+                <div class="faq-item">
+                    <h3 class="faq-question">Q4. 화질은 유지되나요?</h3>
+                    <p class="faq-answer">네, 원본 사진의 해상도와 디테일을 최대한 유지하면서 호환성 높은 고화질 JPG 파일로 변환됩니다.</p>
+                </div>
             </div>
 
-            <div class="faq-item">
-                <h3 class="faq-question">화질 저하는 없나요?</h3>
-                <p class="faq-answer">최첨단 변환 기술을 사용하여 원본의 해상도와 디테일을 유지한 채 고화질 JPG로 변환됩니다.</p>
+            <!-- Legal Links -->
+            <div class="footer-links">
+                <a href="privacy.html">개인정보처리방침</a>
+                <span class="separator">|</span>
+                <a href="terms.html">이용약관</a>
+                <span class="separator">|</span>
+                <a href="mailto:verygoodchocolate@gmail.com">문의하기</a>
             </div>
 
-            <div class="faq-item">
-                <h3 class="faq-question">제 사진은 서버에 저장되나요?</h3>
-                <p class="faq-answer priority-answer">전혀 저장되지 않습니다. 모든 변환 과정은 사용자의 브라우저 내에서 안전하게 처리되므로 개인정보 유출 걱정이 없습니다.
-                </p>
-            </div>
+            <p class="copyright">Copyright © 2026 HEIC Converter. All rights reserved.</p>
         </div>
-
-        <!-- Footer -->
-        <footer class="footer">
-            Created by VeryGood Design
-        </footer>
-    </div>
+    </footer>
 
     <script src="script.js"></script>
 </body>
