@@ -1,0 +1,322 @@
+/* Reset & Base Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: -apple-system, BlinkMacSystemFont, "San Francisco", "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+body {
+    background-color: #F5F5F7;
+    color: #1D1D1F;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    position: relative;
+    overflow-x: hidden;
+}
+
+/* Mesh Gradient Background */
+body::before {
+    content: '';
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 120vw;
+    height: 120vh;
+    background:
+        radial-gradient(circle at 15% 50%, rgba(255, 200, 221, 0.4) 0%, transparent 25%),
+        radial-gradient(circle at 85% 30%, rgba(255, 228, 230, 0.4) 0%, transparent 25%);
+    background-color: #F5F5F7;
+    z-index: -1;
+    filter: blur(60px);
+}
+
+/* Main Wrapper */
+.main-wrapper {
+    width: 100%;
+    max-width: 480px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* Card Container */
+.card {
+    background-color: #FFFFFF;
+    width: 100%;
+    padding: 40px;
+    border-radius: 24px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
+    text-align: center;
+    transition: transform 0.3s ease;
+    margin-bottom: 40px;
+    z-index: 1;
+}
+
+h1 {
+    font-size: 28px;
+    font-weight: 700;
+    margin-bottom: 12px;
+}
+
+p.subtitle {
+    font-size: 16px;
+    color: #86868B;
+    margin-bottom: 32px;
+    line-height: 1.5;
+}
+
+/* Segmented Control */
+.segmented-control {
+    position: relative;
+    display: inline-flex;
+    background-color: #EFEFF4;
+    padding: 4px;
+    border-radius: 98px;
+    margin-bottom: 24px;
+    width: 300px;
+    /* Fixed width for better look */
+    justify-content: space-between;
+}
+
+.segmented-control input {
+    display: none;
+}
+
+.segmented-control label {
+    flex: 1;
+    z-index: 2;
+    padding: 8px 16px;
+    font-size: 14px;
+    font-weight: 500;
+    color: #86868B;
+    text-align: center;
+    cursor: pointer;
+    transition: color 0.3s ease;
+    border-radius: 98px;
+    position: relative;
+}
+
+.segmented-control input:checked+label {
+    color: #1D1D1F;
+    font-weight: 600;
+}
+
+/* Sliding Background Effect */
+.segmented-background {
+    position: absolute;
+    top: 4px;
+    left: 4px;
+    width: calc(50% - 4px);
+    height: calc(100% - 8px);
+    background-color: #FFFFFF;
+    border-radius: 98px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12);
+    transition: transform 0.3s cubic-bezier(0.25, 0.1, 0.25, 1);
+    z-index: 1;
+}
+
+/* Slide to right when 2nd input is checked */
+.segmented-control input:nth-of-type(2):checked~.segmented-background {
+    transform: translateX(100%);
+}
+
+/* Adjust for padding */
+.segmented-control input:nth-of-type(2):checked~.segmented-background {
+    transform: translateX(calc(100% + 0px));
+    /* Logic handled by width calc */
+}
+
+/* Dropzone Area */
+.dropzone {
+    width: 100%;
+    height: 200px;
+    border: 2px dashed #D2D2D7;
+    border-radius: 16px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.25, 0.1, 0.25, 1);
+    background-color: #FAFAFC;
+}
+
+.dropzone:hover,
+.dropzone.dragover {
+    border-color: #0071E3;
+    background-color: rgba(0, 113, 227, 0.04);
+    transform: scale(1.02);
+}
+
+.dropzone .icon {
+    font-size: 48px;
+    margin-bottom: 16px;
+    color: #86868B;
+    transition: color 0.3s ease;
+}
+
+.dropzone:hover .icon,
+.dropzone.dragover .icon {
+    color: #0071E3;
+}
+
+.dropzone-text {
+    font-size: 15px;
+    color: #1D1D1F;
+    font-weight: 500;
+}
+
+.dropzone-subtext {
+    font-size: 13px;
+    color: #86868B;
+    margin-top: 4px;
+}
+
+/* Loading State */
+.loading-container {
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 20px;
+}
+
+.spinner {
+    width: 40px;
+    height: 40px;
+    border: 3px solid rgba(0, 113, 227, 0.1);
+    border-radius: 50%;
+    border-top-color: #0071E3;
+    animation: spin 1s linear infinite;
+    margin-bottom: 16px;
+}
+
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+.loading-text {
+    font-size: 15px;
+    color: #86868B;
+}
+
+/* Result Area */
+.result-container {
+    display: none;
+    margin-top: 24px;
+    animation: fadeIn 0.5s ease;
+}
+
+.btn-download {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    padding: 14px 24px;
+    background-color: #0071E3;
+    color: #FFFFFF;
+    font-size: 16px;
+    font-weight: 600;
+    border-radius: 12px;
+    text-decoration: none;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.2s ease, transform 0.1s ease;
+    box-shadow: 0 4px 12px rgba(0, 113, 227, 0.2);
+}
+
+.btn-download:hover {
+    background-color: #0077ED;
+}
+
+.btn-download:active {
+    transform: scale(0.98);
+}
+
+.btn-reset {
+    background: none;
+    border: none;
+    color: #0071E3;
+    font-size: 14px;
+    margin-top: 16px;
+    cursor: pointer;
+    padding: 8px;
+}
+
+.btn-reset:hover {
+    text-decoration: underline;
+}
+
+/* Animations */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Hidden Input */
+#fileInput {
+    display: none;
+}
+
+/* Features Section */
+.features {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    width: 100%;
+    margin-bottom: 40px;
+}
+
+.feature-item {
+    text-align: center;
+}
+
+.feature-icon {
+    font-size: 24px;
+    margin-bottom: 8px;
+}
+
+.feature-title {
+    font-size: 14px;
+    font-weight: 600;
+    color: #1D1D1F;
+    margin-bottom: 4px;
+}
+
+.feature-desc {
+    font-size: 12px;
+    color: #86868B;
+    line-height: 1.4;
+    word-break: keep-all;
+}
+
+/* Footer */
+.footer {
+    font-size: 12px;
+    color: #86868B;
+    text-align: center;
+    margin-top: auto;
+    width: 100%;
+}
+
+/* Mobile Responsiveness */
+@media (max-width: 600px) {
+    .features {
+        grid-template-columns: 1fr;
+        /* Stack vertically on small screens */
+        gap: 24px;
+    }
+}

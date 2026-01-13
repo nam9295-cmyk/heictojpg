@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HEIC to JPG Converter</title>
+    <!-- heic2any Library -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/heic2any/0.0.3/heic2any.min.js"></script>
+    <!-- FFmpeg WASM -->
+    <script src="https://unpkg.com/@ffmpeg/ffmpeg@0.10.0/dist/ffmpeg.min.js"></script>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <div class="main-wrapper">
+        <div class="card">
+            <!-- Segmented Control -->
+            <div class="segmented-control">
+                <input type="radio" name="mode" id="mode-image" value="image" checked>
+                <label for="mode-image">HEIC 사진</label>
+
+                <input type="radio" name="mode" id="mode-video" value="video">
+                <label for="mode-video">MOV 영상</label>
+
+                <div class="segmented-background"></div>
+            </div>
+
+            <h1 id="titleText">HEIC Converter</h1>
+            <p class="subtitle" id="subtitleText">HEIC 이미지를 고화질 JPG로<br>빠르고 안전하게 변환하세요.</p>
+
+            <!-- Dropzone -->
+            <div class="dropzone" id="dropzone">
+                <div class="icon">
+                    <!-- Simple SVG Icon -->
+                    <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                        <polyline points="17 8 12 3 7 8"></polyline>
+                        <line x1="12" y1="3" x2="12" y2="15"></line>
+                    </svg>
+                </div>
+                <span class="dropzone-text">이미지를 드래그하거나 클릭하여 선택</span>
+                <span class="dropzone-subtext">HEIC, HEIF 파일 지원</span>
+                <input type="file" id="fileInput" accept=".heic,.HEIC">
+            </div>
+
+            <!-- Loading -->
+            <div class="loading-container" id="loadingContainer">
+                <div class="spinner"></div>
+                <p class="loading-text">변환 중입니다...</p>
+            </div>
+
+            <!-- Result -->
+            <div class="result-container" id="resultContainer">
+                <div style="margin-bottom: 24px; color: #1D1D1F; font-weight: 500;">
+                    변환이 완료되었습니다!
+                </div>
+                <a href="#" id="downloadLink" class="btn-download" download>JPG 다운로드</a>
+                <button id="resetBtn" class="btn-reset">다른 파일 변환하기</button>
+            </div>
+        </div>
+
+        <!-- Features Section -->
+        <div class="features">
+            <div class="feature-item">
+                <div class="feature-icon">🔒</div>
+                <h3 class="feature-title">안전한 보안</h3>
+                <p class="feature-desc">서버로 전송되지 않고<br>브라우저에서 바로 변환됩니다.</p>
+            </div>
+            <div class="feature-item">
+                <div class="feature-icon">⚡</div>
+                <h3 class="feature-title">초고속 변환</h3>
+                <p class="feature-desc">드래그 한 번으로<br>1초 만에 JPG로 변환하세요.</p>
+            </div>
+            <div class="feature-item">
+                <div class="feature-icon">💎</div>
+                <h3 class="feature-title">원본 화질 유지</h3>
+                <p class="feature-desc">품질 저하 없이<br>선명하게 변환됩니다.</p>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <footer class="footer">
+            Created by VeryGood Design
+        </footer>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
