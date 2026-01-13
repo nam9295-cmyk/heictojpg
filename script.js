@@ -18,31 +18,52 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // --- State & FFmpeg ---
     let currentMode = 'image'; // 'image' or 'video'
-    const { FFmpeg } = FFmpegWASM;
-    const { fetchFile, toBlobURL } = FFmpegUtil;
+    const { createFFmpeg, fetchFile } = FFmpeg;
     let ffmpeg = null;
 
-    // Initialize FFmpeg
+    // Initialize FFmpeg with Blob URL Hack
     async function initFFmpeg() {
         if (ffmpeg === null) {
-            ffmpeg = new FFmpeg();
-            // log progress
-            ffmpeg.on('log', ({ message }) => {
-                console.log(message);
-            });
-            ffmpeg.on('progress', ({ progress }) => {
-                const percent = Math.round(progress * 100);
-                loadingText.textContent = `동영상 인코딩 중... (${percent}%)`;
-            });
+            try {
+                // 1. Define URL for Single Threaded Core (v0.11 compatible)
+                // Use 0.10.0 core for reliable ST support across 0.10/0.11 clients
+                const coreVersion = '0.10.0';
+                const coreURL = `https://unpkg.com/@ffmpeg/core@${coreVersion}/dist/ffmpeg-core.js`;
+
+                // 2. Fetch the script as text
+                const response = await fetch(coreURL);
+                const scriptText = await response.text();
+
+                // 3. Create a Blob from the text
+                // Adjusting the script to look for wasm at absolute path if needed, 
+                // but usually defining mainName/corePath is enough if we don't need to patch the internal path.
+                // For 'Failed to construct Worker', simplified blob is enough.
+                const blob = new Blob([scriptText], { type: 'application/javascript' });
+                const blobURL = URL.createObjectURL(blob);
+
+                // 4. Initialize createFFmpeg with corePath as Blob URL
+                ffmpeg = createFFmpeg({
+                    log: true,
+                    corePath: blobURL,
+                });
+
+                if (!ffmpeg.isLoaded()) {
+                    await ffmpeg.load();
+                }
+
+            } catch (e) {
+                console.error("FFmpeg Init Error:", e);
+                alert("FFmpeg 초기화 실패: " + e.message);
+            }
         }
     }
 
+
     // --- Event Listeners ---
 
-    // Mode Switching
     function updateMode(mode) {
         currentMode = mode;
-        resetUI(); // Clear any existing files
+        resetUI();
 
         if (mode === 'image') {
             dropzoneText.textContent = "이미지를 드래그하거나 클릭하여 선택";
@@ -56,6 +77,9 @@ document.addEventListener('DOMContentLoaded', () => {
             fileInput.accept = ".mov,.MOV";
             title.textContent = "MOV Converter";
             subtitle.innerHTML = "MOV 영상을 MP4로<br>간편하게 변환하세요.";
+
+            // Pre-load FFmpeg
+            initFFmpeg();
         }
     }
 
@@ -67,20 +91,16 @@ document.addEventListener('DOMContentLoaded', () => {
         if (modeVideoInput.checked) updateMode('video');
     });
 
-
-    // Click to upload
     dropzone.addEventListener('click', () => {
         fileInput.click();
     });
 
-    // File Selection
     fileInput.addEventListener('change', (e) => {
         if (e.target.files.length > 0) {
             handleFile(e.target.files[0]);
         }
     });
 
-    // Drag & Drop
     dropzone.addEventListener('dragover', (e) => {
         e.preventDefault();
         dropzone.classList.add('dragover');
@@ -98,7 +118,6 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    // Reset Button
     resetBtn.addEventListener('click', resetUI);
 
 
@@ -149,44 +168,34 @@ document.addEventListener('DOMContentLoaded', () => {
 
         try {
             if (!ffmpeg) await initFFmpeg();
-
-            if (!ffmpeg.loaded) {
-                // Explicitly load Single Threaded Core
-                const baseURL = 'https://unpkg.com/@ffmpeg/core@0.12.6/dist/esm';
-                await ffmpeg.load({
-                    coreURL: await toBlobURL(`${baseURL}/ffmpeg-core.js`, 'text/javascript'),
-                    wasmURL: await toBlobURL(`${baseURL}/ffmpeg-core.wasm`, 'application/wasm'),
-                });
-            }
+            if (!ffmpeg.isLoaded()) await ffmpeg.load();
 
             const fileName = 'input.mov';
-            await ffmpeg.writeFile(fileName, await fetchFile(file));
+            ffmpeg.FS('writeFile', fileName, await fetchFile(file));
 
             showLoading('동영상 인코딩 중... (0%)');
 
-            // Run conversion
-            await ffmpeg.exec(['-i', fileName, 'output.mp4']);
+            ffmpeg.setProgress(({ ratio }) => {
+                const percent = Math.round(ratio * 100);
+                loadingText.textContent = `동영상 인코딩 중... (${percent}%)`;
+            });
 
-            // Read the result
-            const data = await ffmpeg.readFile('output.mp4');
+            await ffmpeg.run('-i', fileName, 'output.mp4');
 
-            // Create Blob
+            const data = ffmpeg.FS('readFile', 'output.mp4');
             const mp4Blob = new Blob([data.buffer], { type: 'video/mp4' });
 
             showResult(mp4Blob, file.name, 'mp4');
 
-            // Cleanup
-            await ffmpeg.deleteFile(fileName);
-            await ffmpeg.deleteFile('output.mp4');
+            ffmpeg.FS('unlink', fileName);
+            ffmpeg.FS('unlink', 'output.mp4');
 
         } catch (e) {
             console.error(e);
-            alert('영상 변환 중 오류가 발생했습니다: ' + e.message);
+            alert('영상 변환 중 오류가 발생했습니다. (브라우저 호환성 또는 보안 정책 문제일 수 있습니다)');
             resetUI();
         }
     }
-
-    // --- UI Helpers ---
 
     function showLoading(text) {
         dropzone.style.display = 'none';
