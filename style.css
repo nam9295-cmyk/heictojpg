@@ -70,67 +70,6 @@ p.subtitle {
     line-height: 1.5;
 }
 
-/* Segmented Control */
-.segmented-control {
-    position: relative;
-    display: inline-flex;
-    background-color: #EFEFF4;
-    padding: 4px;
-    border-radius: 98px;
-    margin-bottom: 24px;
-    width: 300px;
-    /* Fixed width for better look */
-    justify-content: space-between;
-}
-
-.segmented-control input {
-    display: none;
-}
-
-.segmented-control label {
-    flex: 1;
-    z-index: 2;
-    padding: 8px 16px;
-    font-size: 14px;
-    font-weight: 500;
-    color: #86868B;
-    text-align: center;
-    cursor: pointer;
-    transition: color 0.3s ease;
-    border-radius: 98px;
-    position: relative;
-}
-
-.segmented-control input:checked+label {
-    color: #1D1D1F;
-    font-weight: 600;
-}
-
-/* Sliding Background Effect */
-.segmented-background {
-    position: absolute;
-    top: 4px;
-    left: 4px;
-    width: calc(50% - 4px);
-    height: calc(100% - 8px);
-    background-color: #FFFFFF;
-    border-radius: 98px;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12);
-    transition: transform 0.3s cubic-bezier(0.25, 0.1, 0.25, 1);
-    z-index: 1;
-}
-
-/* Slide to right when 2nd input is checked */
-.segmented-control input:nth-of-type(2):checked~.segmented-background {
-    transform: translateX(100%);
-}
-
-/* Adjust for padding */
-.segmented-control input:nth-of-type(2):checked~.segmented-background {
-    transform: translateX(calc(100% + 0px));
-    /* Logic handled by width calc */
-}
-
 /* Dropzone Area */
 .dropzone {
     width: 100%;
@@ -277,7 +216,8 @@ p.subtitle {
     grid-template-columns: repeat(3, 1fr);
     gap: 20px;
     width: 100%;
-    margin-bottom: 40px;
+    margin-bottom: 60px;
+    /* Increased margin for FAQ separation */
 }
 
 .feature-item {
@@ -303,6 +243,51 @@ p.subtitle {
     word-break: keep-all;
 }
 
+/* FAQ Section */
+.faq-section {
+    width: 100%;
+    margin-bottom: 40px;
+    text-align: left;
+}
+
+.faq-heading {
+    font-size: 18px;
+    font-weight: 700;
+    color: #1D1D1F;
+    margin-bottom: 24px;
+    text-align: center;
+}
+
+.faq-item {
+    margin-bottom: 20px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.faq-item:last-child {
+    border-bottom: none;
+}
+
+.faq-question {
+    font-size: 15px;
+    font-weight: 600;
+    color: #1D1D1F;
+    margin-bottom: 8px;
+}
+
+.faq-answer {
+    font-size: 14px;
+    color: #86868B;
+    line-height: 1.6;
+}
+
+.faq-answer.priority-answer {
+    color: #0071E3;
+    /* Highlight answer if needed, or keep clean */
+    color: #86868B;
+    /* Reverting to clean gray as requested */
+}
+
 /* Footer */
 .footer {
     font-size: 12px;
@@ -310,13 +295,13 @@ p.subtitle {
     text-align: center;
     margin-top: auto;
     width: 100%;
+    padding-bottom: 40px;
 }
 
 /* Mobile Responsiveness */
 @media (max-width: 600px) {
     .features {
         grid-template-columns: 1fr;
-        /* Stack vertically on small screens */
         gap: 24px;
     }
 }
