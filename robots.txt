@@ -1,2 +1,4 @@
 User-agent: *
 Allow: /
+
+Sitemap: https://heictojpg-6ic.pages.dev/sitemap.xml
