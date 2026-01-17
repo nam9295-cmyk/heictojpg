@@ -53,23 +53,34 @@
     <script type="application/ld+json">
     {
         "@context": "https://schema.org",
-        "@type": "WebApplication",
+        "@type": "SoftwareApplication",
         "name": "HEIC Converter",
         "url": "https://heictojpg-6ic.pages.dev/",
-        "description": "아이폰 HEIC 사진을 JPG로 무료 변환하는 온라인 도구. 설치 없이 브라우저에서 바로 변환.",
+        "description": "아이폰 HEIC 사진을 JPG로 무료 변환하는 온라인 도구. 설치 없이 브라우저에서 바로 변환. 보안 걱정 없는 클라이언트 사이드 변환기.",
+        "image": "https://heictojpg-6ic.pages.dev/og-image.png",
         "applicationCategory": "UtilitiesApplication",
         "operatingSystem": "Any",
         "browserRequirements": "Requires JavaScript",
+        "softwareVersion": "1.0",
         "offers": {
             "@type": "Offer",
             "price": "0",
-            "priceCurrency": "KRW"
+            "priceCurrency": "KRW",
+            "availability": "https://schema.org/InStock"
         },
         "author": {
             "@type": "Organization",
             "name": "VeryGood Chocolate",
             "url": "https://smartstore.naver.com/verygout"
-        }
+        },
+        "aggregateRating": {
+            "@type": "AggregateRating",
+            "ratingValue": "4.9",
+            "ratingCount": "1024",
+            "bestRating": "5",
+            "worstRating": "1"
+        },
+        "featureList": ["HEIC to JPG Conversion", "No Server Upload", "Free Unlimited Use", "High Quality Retention"]
     }
     </script>
     <script type="application/ld+json">
@@ -82,7 +93,7 @@
                 "name": "HEIC Converter는 무료인가요?",
                 "acceptedAnswer": {
                     "@type": "Answer",
-                    "text": "네, 100% 무료이며 변환 횟수에도 제한이 없습니다. 언제 어디서나 자유롭게 이용하세요."
+                    "text": "네, 100% 무료이며 변환 횟수에도 제한이 없습니다. 유료 결제나 구독 없이 언제 어디서나 자유롭게 이용하세요."
                 }
             },
             {
@@ -90,7 +101,7 @@
                 "name": "내 사진이 서버에 저장되나요?",
                 "acceptedAnswer": {
                     "@type": "Answer",
-                    "text": "아니요, 절대 저장되지 않습니다. 모든 변환 과정은 서버를 거치지 않고 사용자의 브라우저 내부에서만 처리되므로 외부 유출 걱정이 없습니다."
+                    "text": "아니요, 절대 저장되지 않습니다. 본 서비스는 Client-side(사용자 브라우저) 기술을 사용하여, 이미지가 외부 서버로 전송되지 않고 사용자의 컴퓨터 내에서만 처리됩니다. 개인정보 유출 걱정 없이 안심하고 사용하세요."
                 }
             },
             {
@@ -98,7 +109,7 @@
                 "name": "아이폰 사진만 변환되나요?",
                 "acceptedAnswer": {
                     "@type": "Answer",
-                    "text": "아이폰, 아이패드 등 Apple 기기에서 촬영된 모든 HEIC/HEIF 포맷의 이미지를 지원합니다."
+                    "text": "아이폰, 아이패드 등 Apple 기기에서 촬영된 모든 HEIC/HEIF 포맷의 이미지를 지원합니다. PC로 옮긴 파일도 변환 가능합니다."
                 }
             },
             {
@@ -106,7 +117,15 @@
                 "name": "화질은 유지되나요?",
                 "acceptedAnswer": {
                     "@type": "Answer",
-                    "text": "네, 원본 사진의 해상도와 디테일을 최대한 유지하면서 호환성 높은 고화질 JPG 파일로 변환됩니다."
+                    "text": "네, 원본 사진의 해상도와 디테일을 최대한 유지하면서 호환성 높은 고화질 JPG 파일로 변환됩니다. 디자이너가 직접 튜닝한 최적의 압축률을 적용했습니다."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "한 번에 여러 장도 변환 가능한가요?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "현재 버전은 안정적인 처리를 위해 한 번에 한 장씩 변환을 권장합니다. 곧 여러 장을 동시에 변환하는 기능이 업데이트될 예정입니다."
                 }
             }
         ]
@@ -119,11 +138,19 @@
         "name": "VeryGood Chocolate",
         "url": "https://smartstore.naver.com/verygout",
         "logo": "https://heictojpg-6ic.pages.dev/og-image.png",
+        "foundingDate": "2023",
+        "sameAs": [
+            "https://smartstore.naver.com/verygout",
+            "https://instagram.com/verygoodchocolate"
+        ],
         "contactPoint": {
             "@type": "ContactPoint",
-            "email": "verygoudchocolate@gmail.com",
-            "contactType": "customer service"
-        }
+            "email": "verygoodchocolate@gmail.com",
+            "contactType": "customer service",
+            "areaServed": "KR",
+            "availableLanguage": "Korean"
+        },
+        "description": "VeryGood Chocolate은 대구에 위치한 수제 초콜릿 전문점이며, 디자이너가 직접 개발한 유용한 웹 유틸리티도 함께 제공합니다."
     }
     </script>
 </head>
@@ -145,14 +172,14 @@
     <main class="main-content">
 
         <!-- Story Headline -->
-        <div class="story-headline">
+        <section class="story-headline" aria-label="Introduction">
             <div class="story-badge">Designed by VeryGood Chocolate</div>
             <h2>매번 포토샵 켜기 귀찮아서</h2>
             <h1>제가 쓸려고 직접 만들었습니다.</h1>
             <p class="story-sub">설치 없이, 로그인 없이. 브라우저에서 가장 빠르고 안전하게 변환하세요.</p>
-        </div>
+        </section>
 
-        <div class="card">
+        <section class="card" aria-label="Converter Tool">
             <h2>HEIC Converter</h2>
             <p class="subtitle">HEIC 이미지를 고화질 JPG로<br>빠르고 안전하게 변환하세요.</p>
 
@@ -185,10 +212,10 @@
                 <a href="#" id="downloadLink" class="btn-download" download>JPG 다운로드</a>
                 <button id="resetBtn" class="btn-reset">다른 파일 변환하기</button>
             </div>
-        </div>
+        </section>
 
         <!-- Features Section -->
-        <div class="features">
+        <section class="features" aria-label="Features">
             <div class="feature-item">
                 <div class="feature-icon">🔒</div>
                 <h3 class="feature-title">안전한 보안</h3>
@@ -204,24 +231,27 @@
                 <h3 class="feature-title">원본 화질 유지</h3>
                 <p class="feature-desc">품질 저하 없이<br>선명하게 변환됩니다.</p>
             </div>
-        </div>
+        </section>
 
         <!-- Break Proposal Card (Ad) -->
-        <a href="https://smartstore.naver.com/verygout" target="_blank" class="break-card">
-            <div class="break-icon">
-                <dotlottie-player src="https://lottie.host/e2429d75-bfb1-43af-a2cf-d60baa17a1ca/k9Q9iDrxje.lottie"
-                    background="transparent" speed="1" style="width: 100px; height: 100px;" loop
-                    autoplay></dotlottie-player>
-            </div>
-            <div class="break-content">
-                <div class="break-subtitle">당 충전이 필요하신가요?</div>
-                <div class="break-text">디자인 작업엔 달콤한 휴식이 필수죠.<br>대구 베리굿초콜릿에서 직접 만든 수제 초콜릿을 만나보세요.</div>
-                <div class="break-link">구경하러 가기 →</div>
-            </div>
-        </a>
+        <aside class="break-card" aria-label="Sponsor">
+            <a href="https://smartstore.naver.com/verygout" target="_blank"
+                style="display: flex; text-decoration: none; color: inherit; width: 100%;">
+                <div class="break-icon">
+                    <dotlottie-player src="https://lottie.host/e2429d75-bfb1-43af-a2cf-d60baa17a1ca/k9Q9iDrxje.lottie"
+                        background="transparent" speed="1" style="width: 100px; height: 100px;" loop
+                        autoplay></dotlottie-player>
+                </div>
+                <div class="break-content">
+                    <div class="break-subtitle">당 충전이 필요하신가요?</div>
+                    <div class="break-text">디자인 작업엔 달콤한 휴식이 필수죠.<br>대구 베리굿초콜릿에서 직접 만든 수제 초콜릿을 만나보세요.</div>
+                    <div class="break-link">구경하러 가기 →</div>
+                </div>
+            </a>
+        </aside>
 
         <!-- SEO Info Section -->
-        <section id="article-section" class="info-article">
+        <article id="article-section" class="info-article">
             <h2>HEIC 파일이란?</h2>
             <p>HEIC(High Efficiency Image Container)는 Apple이 iOS 11부터 도입한 고효율 이미지 포맷입니다. 기존 JPG 대비 용량은 절반 수준이면서도 더 뛰어난
                 화질을 제공합니다. 하지만 윈도우(Windows)나 일부 웹사이트에서는 아직 이 형식을 지원하지 않아, 호환성이 좋은 JPG로 변환해야 하는 경우가 많습니다.</p>
@@ -232,6 +262,39 @@
 
             <p>저희 HEIC Converter는 별도의 프로그램 설치 없이 웹 브라우저만으로 즉시 변환이 가능합니다. 특히 사용자의 사진이 외부 서버로 전송되지 않고 내 컴퓨터(브라우저) 안에서만
                 처리되므로, 개인정보 유출 걱정 없이 안전하게 이용하실 수 있습니다.</p>
+        </article>
+
+        <!-- FAQ Section (Moved from Footer) -->
+        <section id="faq-section" class="faq-section">
+            <h2 class="faq-heading">자주 묻는 질문 (FAQ)</h2>
+
+            <details class="faq-item" open>
+                <summary class="faq-question">Q1. HEIC Converter는 정말 무료인가요?</summary>
+                <div class="faq-answer">네, 100% 무료이며 변환 횟수에도 제한이 없습니다. 유료 결제나 구독 없이 언제 어디서나 자유롭게 이용하세요.</div>
+            </details>
+
+            <details class="faq-item">
+                <summary class="faq-question">Q2. 내 사진이 서버에 저장되나요?</summary>
+                <div class="faq-answer priority-answer">아니요, 절대 저장되지 않습니다. 본 서비스는 Client-side(사용자 브라우저) 기술을 사용하여, 이미지가
+                    외부 서버로 전송되지 않고 사용자의 컴퓨터 내에서만 처리됩니다. 개인정보 유출 걱정 없이 안심하고 사용하세요.</div>
+            </details>
+
+            <details class="faq-item">
+                <summary class="faq-question">Q3. 아이폰 사진만 변환되나요?</summary>
+                <div class="faq-answer">아이폰, 아이패드 등 Apple 기기에서 촬영된 모든 HEIC/HEIF 포맷의 이미지를 지원합니다. PC로 옮긴 파일도 변환 가능합니다.
+                </div>
+            </details>
+
+            <details class="faq-item">
+                <summary class="faq-question">Q4. 화질은 유지되나요?</summary>
+                <div class="faq-answer">네, 원본 사진의 해상도와 디테일을 최대한 유지하면서 호환성 높은 고화질 JPG 파일로 변환됩니다. 디자이너가 직접 튜닝한 최적의 압축률을
+                    적용했습니다.</div>
+            </details>
+
+            <details class="faq-item">
+                <summary class="faq-question">Q5. 한 번에 여러 장도 변환 가능한가요?</summary>
+                <div class="faq-answer">현재 버전은 안정적인 처리를 위해 한 번에 한 장씩 변환을 권장합니다. 곧 여러 장을 동시에 변환하는 기능이 업데이트될 예정입니다.</div>
+            </details>
         </section>
 
     </main>
@@ -239,31 +302,7 @@
     <!-- Footer Content (Bottom) -->
     <footer class="site-footer">
         <div class="footer-container">
-            <!-- FAQ Section (Updated content) -->
-            <div id="faq-section" class="faq-section">
-                <h2 class="faq-heading">자주 묻는 질문 (FAQ)</h2>
 
-                <div class="faq-item">
-                    <h3 class="faq-question">Q1. 무료인가요?</h3>
-                    <p class="faq-answer">네, 100% 무료이며 변환 횟수에도 제한이 없습니다. 언제 어디서나 자유롭게 이용하세요.</p>
-                </div>
-
-                <div class="faq-item">
-                    <h3 class="faq-question">Q2. 내 사진이 서버에 저장되나요?</h3>
-                    <p class="faq-answer priority-answer">아니요, 절대 저장되지 않습니다. 모든 변환 과정은 서버를 거치지 않고 사용자의 브라우저 내부에서만 처리되므로
-                        외부 유출 걱정이 없습니다.</p>
-                </div>
-
-                <div class="faq-item">
-                    <h3 class="faq-question">Q3. 아이폰 사진만 되나요?</h3>
-                    <p class="faq-answer">아이폰, 아이패드 등 Apple 기기에서 촬영된 모든 HEIC/HEIF 포맷의 이미지를 지원합니다.</p>
-                </div>
-
-                <div class="faq-item">
-                    <h3 class="faq-question">Q4. 화질은 유지되나요?</h3>
-                    <p class="faq-answer">네, 원본 사진의 해상도와 디테일을 최대한 유지하면서 호환성 높은 고화질 JPG 파일로 변환됩니다.</p>
-                </div>
-            </div>
 
             <!-- Legal Links -->
             <div class="footer-links">

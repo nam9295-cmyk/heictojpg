@@ -1,0 +1,13 @@
+# HEIC Converter
+
+## Summary
+HEIC Converter is a free, secure, client-side tool designed to convert iPhone HEIC/HEIF images to high-quality JPG format instantly within the web browser.
+It requires no software installation or user account, and ensures complete privacy by processing all files locally on the user's device without server uploads.
+Developed by the VeryGood Design Team (VeryGood Chocolate), it offers unlimited fast conversions with original quality retention.
+
+## Key Links
+- Main Tool: https://heictojpg-6ic.pages.dev/
+- About Team: https://heictojpg-6ic.pages.dev/about.html
+- Privacy Policy: https://heictojpg-6ic.pages.dev/privacy.html
+- Terms of Service: https://heictojpg-6ic.pages.dev/terms.html
+- Contact: verygoodchocolate@gmail.com

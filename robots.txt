@@ -2,3 +2,15 @@ User-agent: *
 Allow: /
 
 Sitemap: https://heictojpg-6ic.pages.dev/sitemap.xml
+
+User-agent: GPTBot
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+User-agent: CCBot
+Allow: /
+
+# AI Agent Briefing
+Allow: /llms.txt
